@@ -5,10 +5,6 @@ PIP ?= pip3
 OCTAVE ?= octave --no-gui --no-init-file --no-history --silent
 
 ## Jupyter Notebook
-ifneq ($(shell which jupyter 2> /dev/null),)
-## jupyter command in PATH
-NOTEBOOK ?= jupyter notebook
-else
 ifneq ($(shell which jupyter-notebook 2> /dev/null),)
 ## jupyter-notebook command in PATH
 NOTEBOOK ?= jupyter-notebook
@@ -18,7 +14,6 @@ NOTEBOOK ?= $(PYTHON) -m notebook
 ## install Jupyter if needed
 ifeq ($(shell $(PYTHON) -m jupyter --version 2> /dev/null),)
 run: install-notebook
-endif
 endif
 endif
 
