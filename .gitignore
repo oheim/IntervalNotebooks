@@ -1,2 +1,5 @@
 # Manual save actions in Jupyter Notebooks
 .ipynb_checkpoints
+
+# Data from unexpected exit of Octave kernel
+octave-workspace
