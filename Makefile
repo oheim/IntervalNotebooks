@@ -21,6 +21,11 @@ endif
 endif
 endif
 
+## Jupyter Kernel for Octave
+ifeq ($(shell $(PYTHON) -m octave_kernel --version 2> /dev/null),)
+run: install-octave-kernel
+endif
+
 .PHONY: run
 run:
 	$(NOTEBOOK)
@@ -29,3 +34,8 @@ run:
 install-notebook:
 	$(PIP) install --upgrade pip
 	$(PIP) install --user jupyter
+
+.PHONY: install-octave-kernel
+install-octave-kernel:
+	$(PIP) install --upgrade pip
+	$(PIP) install --user octave_kernel
