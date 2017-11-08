@@ -10,7 +10,7 @@ Clone the repository and start Jupyter.
 * Other requirements will be downloaded as needed
 * The following commands will run Jupyter locally in your browser
 ````
-  git clone git@github.com:oheim/IntervalNotebooks.git
+  git clone https://github.com/oheim/IntervalNotebooks.git
   cd IntervalNotebooks
   make
 ````
