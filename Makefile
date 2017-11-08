@@ -2,6 +2,7 @@ SHELL   = /bin/sh
 
 PYTHON ?= python3
 PIP ?= pip3
+OCTAVE ?= octave --no-gui --no-init-file --no-history --silent
 
 ## Jupyter Notebook
 ifneq ($(shell which jupyter 2> /dev/null),)
@@ -26,6 +27,11 @@ ifeq ($(shell $(PYTHON) -m octave_kernel --version 2> /dev/null),)
 run: install-octave-kernel
 endif
 
+## Interval package for Octave
+ifeq ($(shell $(OCTAVE) --eval "ver ('interval').Version"),)
+run: install-octave-interval
+endif
+
 .PHONY: run
 run:
 	$(NOTEBOOK)
@@ -39,3 +45,7 @@ install-notebook:
 install-octave-kernel:
 	$(PIP) install --upgrade pip
 	$(PIP) install --user octave_kernel
+
+.PHONY: install-octave-interval
+install-octave-interval:
+	$(OCTAVE) --eval "pkg install -forge -local interval"
