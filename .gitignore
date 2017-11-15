@@ -3,3 +3,6 @@
 
 # Data from unexpected exit of Octave kernel
 octave-workspace
+
+# Locally installed libraries
+libs
