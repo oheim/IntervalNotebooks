@@ -39,6 +39,11 @@ ifeq ($(shell $(OCTAVE) --eval "ver ('interval').Version"),)
 run: install-octave-interval
 endif
 
+## pyIbex interval library for Python
+ifeq ($(shell $(PYTHON) -m pyibex --version 2> /dev/null),)
+run: install-pyibex
+endif
+
 ## Jupyter kernel for C++
 ifeq ($(shell $(PYTHON) -m clingkernel --version 2> /dev/null),)
 run: install-cling-kernel
@@ -57,15 +62,21 @@ export PATH := $(CLING_INSTALL_PREFIX)/bin:$(PATH):$(HOME)/.local/bin
 run:
 	$(NOTEBOOK)
 
-.PHONY: install-notebook
-install-notebook:
+.PHONY: upgrade-pip
+upgrade-pip:
 	$(PIP) install --upgrade pip
+
+.PHONY: install-notebook
+install-notebook: upgrade-pip
 	$(PIP) install --user jupyter
 
 .PHONY: install-octave-kernel
-install-octave-kernel:
-	$(PIP) install --upgrade pip
+install-octave-kernel: upgrade-pip
 	$(PIP) install --user octave_kernel
+
+.PHONY: install-pyibex
+install-pyibex: upgrade-pip
+	$(PIP) install --user pyibex
 
 .PHONY: install-octave-interval
 install-octave-interval:
